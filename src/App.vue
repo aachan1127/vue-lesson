@@ -7,10 +7,12 @@ const title = ref('Vue.js Course')
 let price = ref(9.99) // refオブジェクト
 
 function increment() {
+  //ボタンを降りた時の処理↓
   price.value += 1 // .valueをつけることで、 priceの値が再レンダリングされる
   instructor.age += 1 // reactive関数で作られているので、 .valueつけなくても再レンダリングされる
   instructor.bio = 'hi'
   instructor.sns.twitter = 'hello'
+  instructor.email = 'info@examlpe.com'
 }
 
 const info = ref({
@@ -26,10 +28,25 @@ const instructor = reactive({
     twitter: '@aachan',
     youtube: '@Akane',
   },
+  email: ref('aachan@example.com'),
 })
 instructor.bio = 'hello'
-console.log(info.value.student) //ref関数なので、.valueをつける
-console.log(instructor.sns) //reactive関数なので、.valueつけなくてもいい
+const items = reactive([ref(1), ref(2), 3])
+// 配列の中身を逆にする
+items.reverse()
+
+// reactive関数でも、配列の時の場合にのみ、.valueをつけないと取り出せないので注意！
+console.log(items[0].value)
+
+//ref関数なので、.valueをつける
+// console.log(info.value.student)
+
+ //reactive関数なので、.valueつけなくてもいい
+// console.log(instructor.sns)
+
+ //reactive関数の中のref関数なので、.valueはつけなくてもいい
+// console.log(instructor.email)
+
 </script>
 
 <template>
@@ -40,6 +57,7 @@ console.log(instructor.sns) //reactive関数なので、.valueつけなくても
   <h2>Instructor age: {{ instructor.age }}</h2>
   <h2>Instructor bio: {{ instructor.bio }}</h2>
   <h2>Instructor SNS Twitter: {{ instructor.sns.twitter }}</h2>
+  <h2>Instructor email: {{ instructor.email }}</h2>
 </template>
 
 <style>
