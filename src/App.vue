@@ -38,15 +38,22 @@ items.reverse()
 // reactive関数でも、配列の時の場合にのみ、.valueをつけないと取り出せないので注意！
 console.log(items[0].value)
 
+// それぞれのプロパティにref関数をつけた時
+const courseInfo = {
+  sections: ref(10),
+  language: ref('Japanese'),
+}
+
+console.log(courseInfo.sections.value)
+
 //ref関数なので、.valueをつける
 // console.log(info.value.student)
 
- //reactive関数なので、.valueつけなくてもいい
+//reactive関数なので、.valueつけなくてもいい
 // console.log(instructor.sns)
 
- //reactive関数の中のref関数なので、.valueはつけなくてもいい
+//reactive関数の中のref関数なので、.valueはつけなくてもいい
 // console.log(instructor.email)
-
 </script>
 
 <template>
@@ -58,6 +65,9 @@ console.log(items[0].value)
   <h2>Instructor bio: {{ instructor.bio }}</h2>
   <h2>Instructor SNS Twitter: {{ instructor.sns.twitter }}</h2>
   <h2>Instructor email: {{ instructor.email }}</h2>
+
+  <!-- courseInfoが普通のオブジェクトなので、.valueは自動でつかないので、自分でつける必要がある！ -->
+  <h2>Course Info Sections: {{ courseInfo.sections.value }}</h2>
 </template>
 
 <style>
