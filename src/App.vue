@@ -54,6 +54,9 @@ console.log(courseInfo.sections.value)
 
 //reactive関数の中のref関数なので、.valueはつけなくてもいい
 // console.log(instructor.email)
+
+const count = ref(2)
+const count2 = ref(2)
 </script>
 
 <template>
@@ -68,6 +71,12 @@ console.log(courseInfo.sections.value)
 
   <!-- courseInfoが普通のオブジェクトなので、.valueは自動でつかないので、自分でつける必要がある！ -->
   <h2>Course Info Sections: {{ courseInfo.sections.value }}</h2>
+
+  <!-- {{  }}の中には、単一の式だけを書くことができる -->
+  <!-- また、if文や、関数の中に定義されているものは使えない -->
+  <div>{{ count + 3 }}</div>
+  <div>{{ count + count2 }}</div>
+  <div>{{ count > 3 ? 'Yes' : 'No' }}</div>
 </template>
 
 <style>
@@ -75,4 +84,3 @@ h1 {
   color: red;
 }
 </style>
-ß
