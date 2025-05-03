@@ -57,6 +57,9 @@ console.log(courseInfo.sections.value)
 
 const count = ref(2)
 const count2 = ref(2)
+
+// v-htmlディレクティブ ()の中をHTMLとして表示できるようになる
+const message = ref('<h1>Hello</h1>')
 </script>
 
 <template>
@@ -77,6 +80,14 @@ const count2 = ref(2)
   <div>{{ count + 3 }}</div>
   <div>{{ count + count2 }}</div>
   <div>{{ count > 3 ? 'Yes' : 'No' }}</div>
+
+  <!-- この２つは同じ表示になる（ディレクティブ） -->
+  <div>{{ count }}</div>
+  <div v-text="count"></div>
+
+  <!-- v-htmlディレクティブ (※ XSS攻撃されやすいので注意が必要！)-->
+<div v-html="message"></div>
+
 </template>
 
 <style>
