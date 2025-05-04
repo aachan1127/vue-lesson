@@ -60,6 +60,10 @@ const count2 = ref(2)
 
 // v-htmlディレクティブ ()の中をHTMLとして表示できるようになる
 const message = ref('<h1>Hello</h1>')
+
+// v-bindディレクティブ URLを表示させたい時はこれを使う
+const vueURL = 'https://vuejs.org'
+const vueId = 'vue-link'
 </script>
 
 <template>
@@ -86,8 +90,10 @@ const message = ref('<h1>Hello</h1>')
   <div v-text="count"></div>
 
   <!-- v-htmlディレクティブ (※ XSS攻撃されやすいので注意が必要！)-->
-<div v-html="message"></div>
+  <div v-html="message"></div>
 
+  <!-- v-bindディレクティブ URLで遷移させたい時-->
+  <a v-bind:id="vueId" v-bind:href="vueURL" :foo>Vue.js</a>
 </template>
 
 <style>
