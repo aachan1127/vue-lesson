@@ -94,6 +94,10 @@ const vueId = 'vue-link'
 
   <!-- v-bindディレクティブ URLで遷移させたい時-->
   <a v-bind:id="vueId" v-bind:href="vueURL" :foo>Vue.js</a>
+
+<!--Boolean属性 NaNやfalseを指定すると、disable属性が消える-->
+<button :disabled="NaN">button</button>
+
 </template>
 
 <style>
