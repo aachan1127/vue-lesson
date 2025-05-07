@@ -93,10 +93,19 @@ const vueId = 'vue-link'
   <div v-html="message"></div>
 
   <!-- v-bindディレクティブ URLで遷移させたい時-->
-  <a v-bind:id="vueId" v-bind:href="vueURL" :foo>Vue.js</a>
+  <!-- <a v-bind:id="vueId" v-bind:href="vueURL" :foo>Vue.js</a> -->
+  <a v-bind="{ id: vueId, href: vueURL }">Vue.js</a>
+  <!-- このようにまとめて書くことも可能 -->
 
-<!--Boolean属性 NaNやfalseを指定すると、disable属性が消える-->
-<button :disabled="NaN">button</button>
+  <!--Boolean属性 NaNやfalseを指定すると、disable属性が消える-->
+  <!-- <button :disabled="NaN">button</button> -->
+
+
+  <!-- v-onディレクティブ  何かが起きた時に何かをさせたい時-->
+  <!-- <button v-on:click="count++">button</button> -->
+  <!-- 上のv-onを@に省略して記載することも可能 -->
+  <button @click="count++">button</button>
+
 
 </template>
 
