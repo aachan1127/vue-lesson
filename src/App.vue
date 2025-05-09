@@ -55,8 +55,8 @@ console.log(courseInfo.sections.value)
 //reactive関数の中のref関数なので、.valueはつけなくてもいい
 // console.log(instructor.email)
 
-const count = ref(2)
-const count2 = ref(2)
+// const count = ref(2)
+// const count2 = ref(2)
 
 // v-htmlディレクティブ ()の中をHTMLとして表示できるようになる
 const message = ref('<h1>Hello</h1>')
@@ -64,6 +64,13 @@ const message = ref('<h1>Hello</h1>')
 // v-bindディレクティブ URLを表示させたい時はこれを使う
 const vueURL = 'https://vuejs.org'
 const vueId = 'vue-link'
+
+// イベントオブジェクト
+const count = ref(0)
+function countUp(event){
+  count.value = event.clientX
+}
+
 </script>
 
 <template>
@@ -81,12 +88,12 @@ const vueId = 'vue-link'
 
   <!-- {{  }}の中には、単一の式だけを書くことができる -->
   <!-- また、if文や、関数の中に定義されているものは使えない -->
-  <div>{{ count + 3 }}</div>
-  <div>{{ count + count2 }}</div>
-  <div>{{ count > 3 ? 'Yes' : 'No' }}</div>
+  <!-- <div>{{ count + 3 }}</div> -->
+  <!-- <div>{{ count + count2 }}</div> -->
+  <!-- <div>{{ count > 3 ? 'Yes' : 'No' }}</div> -->
 
   <!-- この２つは同じ表示になる（ディレクティブ） -->
-  <div>{{ count }}</div>
+  <!-- <div>{{ count }}</div> -->
   <div v-text="count"></div>
 
   <!-- v-htmlディレクティブ (※ XSS攻撃されやすいので注意が必要！)-->
@@ -105,6 +112,12 @@ const vueId = 'vue-link'
   <!-- <button v-on:click="count++">button</button> -->
   <!-- 上のv-onを@に省略して記載することも可能 -->
   <button @click="count++">button</button>
+
+
+<!-- イベントオブジェクト ボタンをクリックした時のX軸の値を取得して表示させる（.clientX)-->
+<p>{{ count }}</p>
+<button @click="count = $event.clientX">button(イベント)</button>
+<button @click="countUp">button(イベント)</button>
 
 
 </template>
