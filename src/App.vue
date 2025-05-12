@@ -67,8 +67,8 @@ const vueId = 'vue-link'
 
 // イベントオブジェクト
 const count = ref(0)
-function countUp(event){
-  count.value = event.clientX
+function countUp(event, times){
+  count.value = event.clientX * times
 }
 
 </script>
@@ -117,7 +117,9 @@ function countUp(event){
 <!-- イベントオブジェクト ボタンをクリックした時のX軸の値を取得して表示させる（.clientX)-->
 <p>{{ count }}</p>
 <button @click="count = $event.clientX">button(イベント)</button>
-<button @click="countUp">button(イベント)</button>
+
+<!-- 関数に引数を渡したいときは、（）にインラインハンドラーとして関数呼び出し式を書く -->
+<button @click="countUp($event, 5)">button(イベント)</button>
 
 
 </template>
