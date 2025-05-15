@@ -67,10 +67,9 @@ const vueId = 'vue-link'
 
 // イベントオブジェクト
 const count = ref(0)
-function countUp(event, times){
+function countUp(event, times) {
   count.value = event.clientX * times
 }
-
 </script>
 
 <template>
@@ -107,21 +106,30 @@ function countUp(event, times){
   <!--Boolean属性 NaNやfalseを指定すると、disable属性が消える-->
   <!-- <button :disabled="NaN">button</button> -->
 
-
   <!-- v-onディレクティブ  何かが起きた時に何かをさせたい時-->
   <!-- <button v-on:click="count++">button</button> -->
   <!-- 上のv-onを@に省略して記載することも可能 -->
   <button @click="count++">button</button>
 
+  <!-- イベントオブジェクト ボタンをクリックした時のX軸の値を取得して表示させる（.clientX)-->
+  <p>{{ count }}</p>
+  <button @click="count = $event.clientX">button(イベント)</button>
 
-<!-- イベントオブジェクト ボタンをクリックした時のX軸の値を取得して表示させる（.clientX)-->
-<p>{{ count }}</p>
-<button @click="count = $event.clientX">button(イベント)</button>
+  <!-- 関数に引数を渡したいときは、（）にインラインハンドラーとして関数呼び出し式を書く -->
+  <button @click="countUp($event, 5)">button(イベント)</button>
 
-<!-- 関数に引数を渡したいときは、（）にインラインハンドラーとして関数呼び出し式を書く -->
-<button @click="countUp($event, 5)">button(イベント)</button>
+  <!-- .preventDefault()でデフォルトの挙動が起きなくできる -->
+  <!-- 例）hrefで遷移できなくなる -->
+  <button @click="$event.preventDefault()">button（イベント修飾子）</button>
+  <a href="http://vuejs.org" @click="$event.preventDefault()">Vue.js（イベント修飾子）</a>
+  <!-- @click.prevent="" でもOK！ ""の中に追加で挙動させたいコードを書ける-->
 
-
+  <!-- .stopPropagation()で親の要素にクリックイベントが発生したことを電波させなくできる -->
+  <div @click="count++">
+    <button @click="$event.stopPropagation()">button(カウントアップしない)</button>
+    <!-- @click.stop="" でもOK! ""の中に追加で挙動させたいコードを書ける-->
+    <!-- @click.stop.prevent の様に連続して書いてもOK！ -->
+  </div>
 </template>
 
 <style>
