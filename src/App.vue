@@ -130,6 +130,11 @@ function countUp(event, times) {
     <!-- @click.stop="" でもOK! ""の中に追加で挙動させたいコードを書ける-->
     <!-- @click.stop.prevent の様に連続して書いてもOK！ -->
   </div>
+
+  <!-- @key.upでキーボードを押された時だけカウントされる .spade(スペースキー) .delete(削除キー) など追加もできる-->
+  <div>
+    <input type="text" @keyup.space.delete="count++" />
+  </div>
 </template>
 
 <style>
