@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
 // ref 関数を呼び出すことで、priceのデータが再レンダリングされる
 // reactive 関数 元々オブジェクトになっているやつはreactive関数を使うことで、いちいちオブジェクトを作らなくていい（ここでいうinstructor）
 
@@ -70,6 +70,18 @@ const count = ref(0)
 function countUp(event, times) {
   count.value = event.clientX * times
 }
+
+// ディレクティブの引数にscriptのデータを指定する方法
+const eventName = 'keyup'
+
+// v-modelを使用してinputを簡単に扱える様にする
+const userInput = ref('')
+
+// computedを使って複雑な式を一つにまとめる方法
+const score = ref(0)
+const evaluation = computed(() => {
+  return score.value > 3 ? 'Good' : 'Bad'
+})
 </script>
 
 <template>
@@ -135,6 +147,26 @@ function countUp(event, times) {
   <div>
     <input type="text" @keyup.space.delete="count++" />
   </div>
+
+  <!-- @[eventName]でkeyupイベントが呼び出されて、スペースを打つとカウントアップされる-->
+  <div>
+    <p>ディレクティブの引数にscriptのデータを指定する方法</p>
+    <input type="text" @[eventName].space.delete="count++">
+  </div>
+
+  <!-- v-modelで ユーザーが入力した値（userInputの値）をリンクさせることができる-->
+    <div>
+      <p>v-modelを使用してinputを簡単に扱える様にする</p>
+      <p>{{ userInput }}</p>
+      <input v-model="userInput" type="text" />
+    </div>
+
+    <!--  -->
+    <p>computedを使って複雑な式を一つにまとめる</p>
+      <p>{{ score > 3 ? 'Good' : 'Bad' }}</p>
+      <p>{{ evaluation }}</p>
+      <p>{{ score }}</p>
+      <button @click="score++">+1</button>
 </template>
 
 <style>
